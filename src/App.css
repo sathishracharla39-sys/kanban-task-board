@@ -1,0 +1,491 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-dark: #0f172a;
+  --bg-light: #1e293b;
+  --card-bg: rgba(255, 255, 255, 0.95);
+  --white: #ffffff;
+  --text-dark: #1e293b;
+  --text-light: #64748b;
+
+  --high: #ef4444;
+  --medium: #f59e0b;
+  --low: #22c55e;
+
+  --shadow:
+    0 10px 25px rgba(0, 0, 0, 0.08);
+
+  --radius: 18px;
+}
+
+body {
+  font-family: "Inter", "Segoe UI", sans-serif;
+  background: linear-gradient(
+    135deg,
+    #0f172a,
+    #1e293b,
+    #334155
+  );
+  min-height: 100vh;
+  color: white;
+}
+
+.app {
+  max-width: 1500px;
+  margin: auto;
+  padding: 30px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.page-header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.page-header h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.page-header p {
+  color: #cbd5e1;
+  font-size: 1rem;
+}
+
+/* =========================
+   TASK FORM
+========================= */
+
+.task-form {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.form-group {
+  display: flex;
+}
+
+.form-group input,
+.form-group select {
+  padding: 14px 16px;
+  border: none;
+  border-radius: 14px;
+  min-width: 240px;
+  font-size: 15px;
+  outline: none;
+  background: white;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.3);
+}
+
+.add-task-btn {
+  border: none;
+  padding: 14px 22px;
+  border-radius: 14px;
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  transition: 0.3s;
+}
+
+.add-task-btn:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+/* =========================
+   SEARCH BAR
+========================= */
+
+.search-bar {
+  width: 100%;
+  max-width: 650px;
+  display: block;
+  margin: 0 auto 35px;
+
+  padding: 15px 18px;
+  border: none;
+  border-radius: 16px;
+
+  font-size: 15px;
+  outline: none;
+
+  box-shadow: var(--shadow);
+}
+
+.search-bar:focus {
+  box-shadow:
+    0 0 0 3px rgba(37,99,235,0.3),
+    var(--shadow);
+}
+
+/* =========================
+   BOARD
+========================= */
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+/* =========================
+   COLUMN
+========================= */
+
+.column {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(255,255,255,0.1);
+
+  border-radius: 24px;
+
+  padding: 20px;
+
+  min-height: 550px;
+
+  transition: 0.3s;
+}
+
+.column:hover {
+  transform: translateY(-4px);
+}
+
+.column-header {
+  margin-bottom: 20px;
+}
+
+.column-header h2 {
+  text-align: center;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* =========================
+   EMPTY COLUMN
+========================= */
+
+.empty-column {
+  border: 2px dashed rgba(255,255,255,0.2);
+  border-radius: 16px;
+  padding: 30px;
+
+  text-align: center;
+  color: #cbd5e1;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.task-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.task-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+}
+
+.task-card.high {
+  border-left: 6px solid var(--high);
+}
+
+.task-card.medium {
+  border-left: 6px solid var(--medium);
+}
+
+.task-card.low {
+  border-left: 6px solid var(--low);
+}
+
+/* =========================
+   DRAG HANDLE
+========================= */
+
+.drag-handle {
+  display: flex;
+  justify-content: flex-end;
+
+  margin-bottom: 10px;
+
+  color: #94a3b8;
+
+  cursor: grab;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+}
+
+/* =========================
+   TASK CONTENT
+========================= */
+
+.task-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.task-title {
+  color: #111827;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+/* =========================
+   PRIORITY BADGES
+========================= */
+
+.priority-badge {
+  align-self: flex-start;
+
+  padding: 6px 12px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.priority-badge.high {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.priority-badge.medium {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.priority-badge.low {
+  background: #dcfce7;
+  color: #166534;
+}
+
+/* =========================
+   EDIT BUTTON
+========================= */
+
+.edit-btn {
+  width: fit-content;
+  border: none;
+  background: #e0e7ff;
+  color: #4338ca;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.edit-btn:hover {
+  background: #c7d2fe;
+}
+
+/* =========================
+   EDIT MODE
+========================= */
+
+.edit-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.edit-input {
+  padding: 12px;
+  border: 1px solid #dbe3ec;
+  border-radius: 12px;
+  outline: none;
+}
+
+.save-btn {
+  border: none;
+
+  background: #16a34a;
+
+  color: white;
+
+  padding: 12px;
+
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  transition: 0.3s;
+}
+
+.save-btn:hover {
+  background: #15803d;
+}
+
+/* =========================
+   ACTION BUTTONS
+========================= */
+
+.task-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.action-btn {
+  width: 40px;
+  height: 40px;
+
+  border: none;
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f1f5f9;
+
+  cursor: pointer;
+
+  transition: .3s;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+  background: #e2e8f0;
+}
+
+.delete-btn {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.delete-btn:hover {
+  background: #fecaca;
+}
+
+/* =========================
+   DRAGGING
+========================= */
+
+.draggable-wrapper {
+  transition: transform 0.2s ease;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1100px) {
+  .board {
+    grid-template-columns: 1fr;
+  }
+
+  .column {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .app {
+    padding: 18px;
+  }
+
+  .page-header h1 {
+    font-size: 2rem;
+  }
+
+  .task-form {
+    flex-direction: column;
+  }
+
+  .form-group input,
+  .form-group select,
+  .add-task-btn {
+    width: 100%;
+  }
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.drag-handle {
+  margin: 0;
+}
+
+.edit-btn {
+  width: 42px;
+  height: 42px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #eef2ff;
+  color: #4338ca;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+}
+
+.edit-btn:hover {
+  background: #c7d2fe;
+}
+
+.task-actions {
+  display: flex;
+  gap: 10px;
+}
